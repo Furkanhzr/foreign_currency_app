@@ -25,7 +25,7 @@ class CurrencyController extends Controller
         if (!$validator->fails()) {
             try {
 //                $response = Http::get('https://api.freecurrencyapi.com/v1/latest', [
-//                    'apikey' => 'fca_live_2XJOtYCF3vbx6JdozJIUT9oOxK0b5dMlszZqH5R7',
+//                    'apikey' => env('API_KEY),
 //                    'base_currency' => $request->base_currency
 //                ]);
 //
@@ -37,7 +37,7 @@ class CurrencyController extends Controller
                 // Cache'de var mı kontrol edelim, eğer yoksa API'ye istek atıp cache'e ekleyelim
                 $cur = Cache::remember($cacheKey, 10 * 60, function () use ($request) {
                     $response = Http::get('https://api.freecurrencyapi.com/v1/latest', [
-                        'apikey' => 'fca_live_2XJOtYCF3vbx6JdozJIUT9oOxK0b5dMlszZqH5R7',
+                        'apikey' => env('API_KEY'),
                         'base_currency' => $request->base_currency
                     ]);
                     return $response->json('data')[$request->currency] ?? 0;
@@ -58,17 +58,17 @@ class CurrencyController extends Controller
     {
         try {
 //            $response_usd = Http::get('https://api.freecurrencyapi.com/v1/latest', [
-//                'apikey' => 'fca_live_G4yhnztyA2kaWYX8RgCMa8quxaRnc0F209lqzhtg',
+//                'apikey' => env('API_KEY),
 //                'base_currency' => 'USD',
 //                'currencies' => 'TRY'
 //            ]);
 //            $response_euro = Http::get('https://api.freecurrencyapi.com/v1/latest', [
-//                'apikey' => 'fca_live_G4yhnztyA2kaWYX8RgCMa8quxaRnc0F209lqzhtg',
+//                'apikey' => env('API_KEY),
 //                'base_currency' => 'EUR',
 //                'currencies' => 'TRY'
 //            ]);
 //            $response_pln = Http::get('https://api.freecurrencyapi.com/v1/latest', [
-//                'apikey' => 'fca_live_G4yhnztyA2kaWYX8RgCMa8quxaRnc0F209lqzhtg',
+//                'apikey' => env('API_KEY),
 //                'base_currency' => 'PLN',
 //                'currencies' => 'TRY'
 //            ]);
@@ -79,7 +79,7 @@ class CurrencyController extends Controller
 
             $usd = Cache::remember('usd_try', 10 * 60, function () {
                 $response = Http::get('https://api.freecurrencyapi.com/v1/latest', [
-                    'apikey' => 'fca_live_G4yhnztyA2kaWYX8RgCMa8quxaRnc0F209lqzhtg',
+                    'apikey' => env('API_KEY'),
                     'base_currency' => 'USD',
                     'currencies' => 'TRY'
                 ]);
@@ -88,7 +88,7 @@ class CurrencyController extends Controller
 
             $euro = Cache::remember('euro_try', 10 * 60, function () {
                 $response = Http::get('https://api.freecurrencyapi.com/v1/latest', [
-                    'apikey' => 'fca_live_G4yhnztyA2kaWYX8RgCMa8quxaRnc0F209lqzhtg',
+                    'apikey' => env('API_KEY'),
                     'base_currency' => 'EUR',
                     'currencies' => 'TRY'
                 ]);
@@ -97,7 +97,7 @@ class CurrencyController extends Controller
 
             $pln = Cache::remember('pln_try', 10 * 60, function () {
                 $response = Http::get('https://api.freecurrencyapi.com/v1/latest', [
-                    'apikey' => 'fca_live_G4yhnztyA2kaWYX8RgCMa8quxaRnc0F209lqzhtg',
+                    'apikey' => env('API_KEY'),
                     'base_currency' => 'PLN',
                     'currencies' => 'TRY'
                 ]);
